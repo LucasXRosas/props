@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 export interface UserProfileCardProps {
   name: string;
@@ -18,9 +18,18 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
   status,
   onPressFollow,
 }) => {
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  const handlePress = () => {
+    setIsFollowing((prev) => !prev);
+
+    if (onPressFollow) {
+      onPressFollow();
+    }
+  };
+
   return (
     <View style={styles.card}>
-      {/* Container do Avatar e Status */}
       <View style={styles.avatarContainer}>
         <Image source={{ uri: avatarUrl }} style={styles.avatar} />
         {status && (
@@ -33,25 +42,29 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
         )}
       </View>
 
-      {/* Informações do Usuário */}
       <View style={styles.infoContainer}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.role}>{role}</Text>
-        
-        {/* Renderização Condicional da Biografia */}
         <Text style={styles.bio}>
           {bio ? bio : 'Este usuário não possui biografia.'}
         </Text>
       </View>
 
-      {/* Botão Seguir (Exibido apenas se a callback onPressFollow for fornecida) */}
       {onPressFollow && (
         <TouchableOpacity 
-          style={styles.followButton} 
-          onPress={onPressFollow}
+          style={[
+            styles.followButton, 
+            isFollowing && styles.followingButton
+          ]} 
+          onPress={handlePress}
           activeOpacity={0.7}
         >
-          <Text style={styles.followButtonText}>Seguir</Text>
+          <Text style={[
+            styles.followButtonText,
+            isFollowing && styles.followingButtonText
+          ]}>
+            {isFollowing ? 'Seguindo' : 'Seguir'}
+          </Text>
         </TouchableOpacity>
       )}
     </View>
@@ -66,10 +79,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 10,
     marginHorizontal: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
     elevation: 4,
   },
   avatarContainer: {
@@ -119,8 +128,8 @@ const styles = StyleSheet.create({
     color: '#888888',
     textAlign: 'center',
     lineHeight: 18,
-    paddingHorizontal: 8,
   },
+  // Estilo padrão (Seguir - Azul)
   followButton: {
     backgroundColor: '#007AFF',
     paddingVertical: 10,
@@ -133,5 +142,12 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '600',
     fontSize: 14,
+  },
+  // Estilo ativo (Seguindo - Cinza)
+  followingButton: {
+    backgroundColor: '#E5E5EA',
+  },
+  followingButtonText: {
+    color: '#000000',
   },
 });

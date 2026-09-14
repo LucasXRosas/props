@@ -1,6 +1,5 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, Alert } from 'react-native';
-// Use react-native-safe-area-context instead of react-native's SafeAreaView
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { UserProfileCard } from './components/UserProfileCard';
 
@@ -11,31 +10,28 @@ export default function App() {
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <Text style={styles.headerTitle}>Perfis de Usuários</Text>
 
-          {/* Usuário 1: Todas as propriedades fornecidas */}
           <UserProfileCard
-            name="Ana Silva"
+            name="Analice Xavier"
             role="Product Designer"
-            avatarUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
+            avatarUrl="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
             bio="Apaixonada por criar experiências visuais incríveis e acessíveis para mobile."
             status="online"
-            onPressFollow={() => Alert.alert('Ação', 'Você começou a seguir Ana Silva!')}
+            onPressFollow={() => Alert.alert('Ação', 'Você começou a seguir Analice Xavier!')}
           />
 
-          {/* Usuário 2: Apenas propriedades obrigatórias e status offline */}
           <UserProfileCard
-            name="Carlos Eduardo"
+            name="Andres Jessé Porfirio"
             role="Desenvolvedor Mobile"
-            avatarUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
+            avatarUrl="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
             status="offline"
           />
 
-          {/* Usuário 3: Com biografia personalizada, mas sem status */}
           <UserProfileCard
-            name="Beatriz Lima"
+            name="Lucas Rosa"
             role="Tech Lead"
-            avatarUrl="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
+            avatarUrl="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
             bio="Liderando times técnicos rumo a soluções escaláveis em React Native."
-            onPressFollow={() => Alert.alert('Ação', 'Você começou a seguir Beatriz Lima!')}
+            onPressFollow={() => Alert.alert('Ação', 'Você começou a seguir Lucas Rosa!')}
           />
         </ScrollView>
       </SafeAreaView>
