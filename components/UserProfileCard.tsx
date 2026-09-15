@@ -61,7 +61,7 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
         >
           <Text style={[
             styles.followButtonText,
-            isFollowing && styles.followingButtonText
+            isFollowing && styles.followingButtonText 
           ]}>
             {isFollowing ? 'Seguindo' : 'Seguir'}
           </Text>
